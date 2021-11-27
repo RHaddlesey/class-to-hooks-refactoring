@@ -28,7 +28,10 @@ export default class App extends React.Component {
     axios
       .get(`https://randomuser.me/api/?page=${page}&results=10`)
       .then((response) => {
-        this.setState({ users: response.data.results, errorMsg: "" });
+        this.setState((prevState) => ({
+          users: [...prevState.users, ...response.data.results],
+          errorMsg: "",
+        }));
       })
       .catch((error) =>
         this.setState({
